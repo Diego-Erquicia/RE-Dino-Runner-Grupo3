@@ -1,13 +1,11 @@
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
-from dino_runner.components.obstacles.shield import Shield
 from dino_runner.components.powerups.power_up_manager import PowerUpManager
 from dino_runner.components.score import Score
 from dino_runner.components import text_utils
 
-from dino_runner.utils.constants import BG, DEFAULT_TYPE, FONT_STYLE, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, SMALL_CACTUS, TITLE, FPS
+from dino_runner.utils.constants import BG, DEFAULT_TYPE, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, TITLE, FPS
 
 class Game:
     def __init__(self):
@@ -113,9 +111,7 @@ class Game:
             self.screen.blit(score, score_rect)
             self.screen.blit(text, text_rect)
             self.screen.blit(death, death_rect)
-            #Mostrar mensaje de volver a jugar ()
-            # MOstrar total de muertes
-            # MOstrar el puntaje
+        
         #Mostrar imagen en el menu*
 
         self.screen.blit(RUNNING[0], (half_screen_width - 30, half_screen_height + 140))
@@ -129,7 +125,6 @@ class Game:
             if event.type == pygame.QUIT:
                 self.executing = False
             elif event.type == pygame.KEYDOWN:
-
                 self.run()
 
     def on_death (self):
@@ -139,8 +134,9 @@ class Game:
             self.death_count += 1
         return is_invencible
 
+
+
     def draw_power_up_activate (self):
-        
         if self.player.has_power_up:
             time_to_show = round ((self.player.power_up_time_up - pygame.time.get_ticks())) / 1000
             if time_to_show >= 0:

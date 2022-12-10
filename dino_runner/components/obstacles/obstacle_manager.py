@@ -1,7 +1,8 @@
 import random
 import pygame
+from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.cactus import Cactus
-from dino_runner.utils.constants import SMALL_CACTUS
+from dino_runner.utils.constants import BIRD
 
 
 class ObstacleManager:
@@ -10,11 +11,15 @@ class ObstacleManager:
 
     def update (self, game):
         if len(self.obstacles) == 0:
-            if random.randint(0,1) == 0:
+            if random.randint(0,2) == 0:
                 cactus_type = "SMALL"
-            else:
+                self.obstacles.append (Cactus(cactus_type))
+            elif random.randint(0,2) == 1:
                 cactus_type = "LARGE"
-            self.obstacles.append (Cactus(cactus_type))
+                self.obstacles.append (Cactus(cactus_type))
+            elif random.randint(0,2) == 2:
+                self.obstacles.append (Bird(BIRD))
+
         
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
@@ -23,7 +28,7 @@ class ObstacleManager:
                 if game.on_death():
                     self.obstacles.remove(obstacle)
                 else:
-                #game.playing = False
+                    #game.playing = False
 
                     break
 
