@@ -7,7 +7,7 @@ from dino_runner.components.powerups.power_up_manager import PowerUpManager
 from dino_runner.components.score import Score
 from dino_runner.components import text_utils
 
-from dino_runner.utils.constants import BG, DEFAULT_TYPE, FONT_STYLE, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, SMALL_CACTUS, TITLE, FPS
+from dino_runner.utils.constants import BG, DEFAULT_TYPE, FONT_STYLE, HAMMER_TYPE, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, SHIELD_TYPE, SMALL_CACTUS, TITLE, FPS
 
 class Game:
     def __init__(self):
@@ -98,11 +98,6 @@ class Game:
 
             text, text_rect = text_utils.get_centered_message('Press any Key to Start')
             self.screen.blit(text, text_rect)
-            #font = pygame.font.Font(FONT_STYLE, 30)
-            #text_component = font.render("Press any key to play", True, (0,0,0))
-            #text_rect = text_component.get_rect()
-            #text_rect.center = (half_screen_width, half_screen_height)
-            #self.screen.blit(text_component,text_rect)
         else:
             text, text_rect = text_utils.get_centered_message('Press any Key to Restart')
             score, score_rect = text_utils.get_centered_message('Your Score: ' + str(self.score.score),
@@ -113,10 +108,6 @@ class Game:
             self.screen.blit(score, score_rect)
             self.screen.blit(text, text_rect)
             self.screen.blit(death, death_rect)
-            #Mostrar mensaje de volver a jugar ()
-            # MOstrar total de muertes
-            # MOstrar el puntaje
-        #Mostrar imagen en el menu*
 
         self.screen.blit(RUNNING[0], (half_screen_width - 30, half_screen_height + 140))
         #actulizar ventana*
@@ -138,6 +129,7 @@ class Game:
             self.playing = False
             self.death_count += 1
         return is_invencible
+
 
     def draw_power_up_activate (self):
         if self.player.has_power_up:

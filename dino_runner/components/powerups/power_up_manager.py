@@ -10,14 +10,15 @@ class PowerUpManager ():
     def __init__ (self):
         self.power_ups = []
         self.when_appears = 0
+        self.hammer_appears = 0
         self.increment = 0
     
     def generate_power_up (self, score):
-        if len (self.power_ups) == 0 and self.when_appears + self.increment == score:
-            if random.randint(0,1)==0:
-               self.power_ups.append(Shield())
-            elif random.randint(0,1)==1:
-               self.power_ups.append(Hammer())
+        if len(self.power_ups) == 0 and self.when_appears == score or self.hammer_appears == score:
+            if random.randint(0,1) == 0:
+                self.power_ups.append(Shield())
+            else:
+                self.power_ups.append(Hammer())
 
     def update (self, game_speed, player, score):
         self.generate_power_up(score)
@@ -38,4 +39,5 @@ class PowerUpManager ():
     def reset_power_ups(self):
         self.power_ups = []
         self.when_appears = randint(200, 300)
+        self.hammer_appears = randint(300, 500)
         self.increment = 0
